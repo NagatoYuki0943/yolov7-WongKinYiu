@@ -121,60 +121,60 @@ def train(hyp, opt, device, tb_writer=None):
         elif hasattr(v, 'weight') and isinstance(v.weight, nn.Parameter):
             pg1.append(v.weight)  # apply decay
         if hasattr(v, 'im'):
-            if hasattr(v.im, 'implicit'):           
+            if hasattr(v.im, 'implicit'):
                 pg0.append(v.im.implicit)
             else:
                 for iv in v.im:
                     pg0.append(iv.implicit)
         if hasattr(v, 'imc'):
-            if hasattr(v.imc, 'implicit'):           
+            if hasattr(v.imc, 'implicit'):
                 pg0.append(v.imc.implicit)
             else:
                 for iv in v.imc:
                     pg0.append(iv.implicit)
         if hasattr(v, 'imb'):
-            if hasattr(v.imb, 'implicit'):           
+            if hasattr(v.imb, 'implicit'):
                 pg0.append(v.imb.implicit)
             else:
                 for iv in v.imb:
                     pg0.append(iv.implicit)
         if hasattr(v, 'imo'):
-            if hasattr(v.imo, 'implicit'):           
+            if hasattr(v.imo, 'implicit'):
                 pg0.append(v.imo.implicit)
             else:
                 for iv in v.imo:
                     pg0.append(iv.implicit)
         if hasattr(v, 'ia'):
-            if hasattr(v.ia, 'implicit'):           
+            if hasattr(v.ia, 'implicit'):
                 pg0.append(v.ia.implicit)
             else:
                 for iv in v.ia:
                     pg0.append(iv.implicit)
         if hasattr(v, 'attn'):
-            if hasattr(v.attn, 'logit_scale'):   
+            if hasattr(v.attn, 'logit_scale'):
                 pg0.append(v.attn.logit_scale)
-            if hasattr(v.attn, 'q_bias'):   
+            if hasattr(v.attn, 'q_bias'):
                 pg0.append(v.attn.q_bias)
-            if hasattr(v.attn, 'v_bias'):  
+            if hasattr(v.attn, 'v_bias'):
                 pg0.append(v.attn.v_bias)
-            if hasattr(v.attn, 'relative_position_bias_table'):  
+            if hasattr(v.attn, 'relative_position_bias_table'):
                 pg0.append(v.attn.relative_position_bias_table)
         if hasattr(v, 'rbr_dense'):
-            if hasattr(v.rbr_dense, 'weight_rbr_origin'):  
+            if hasattr(v.rbr_dense, 'weight_rbr_origin'):
                 pg0.append(v.rbr_dense.weight_rbr_origin)
-            if hasattr(v.rbr_dense, 'weight_rbr_avg_conv'): 
+            if hasattr(v.rbr_dense, 'weight_rbr_avg_conv'):
                 pg0.append(v.rbr_dense.weight_rbr_avg_conv)
-            if hasattr(v.rbr_dense, 'weight_rbr_pfir_conv'):  
+            if hasattr(v.rbr_dense, 'weight_rbr_pfir_conv'):
                 pg0.append(v.rbr_dense.weight_rbr_pfir_conv)
-            if hasattr(v.rbr_dense, 'weight_rbr_1x1_kxk_idconv1'): 
+            if hasattr(v.rbr_dense, 'weight_rbr_1x1_kxk_idconv1'):
                 pg0.append(v.rbr_dense.weight_rbr_1x1_kxk_idconv1)
-            if hasattr(v.rbr_dense, 'weight_rbr_1x1_kxk_conv2'):   
+            if hasattr(v.rbr_dense, 'weight_rbr_1x1_kxk_conv2'):
                 pg0.append(v.rbr_dense.weight_rbr_1x1_kxk_conv2)
-            if hasattr(v.rbr_dense, 'weight_rbr_gconv_dw'):   
+            if hasattr(v.rbr_dense, 'weight_rbr_gconv_dw'):
                 pg0.append(v.rbr_dense.weight_rbr_gconv_dw)
-            if hasattr(v.rbr_dense, 'weight_rbr_gconv_pw'):   
+            if hasattr(v.rbr_dense, 'weight_rbr_gconv_pw'):
                 pg0.append(v.rbr_dense.weight_rbr_gconv_pw)
-            if hasattr(v.rbr_dense, 'vector'):   
+            if hasattr(v.rbr_dense, 'vector'):
                 pg0.append(v.rbr_dense.vector)
 
     if opt.adam:
@@ -548,7 +548,7 @@ if __name__ == '__main__':
     parser.add_argument('--adam', action='store_true', help='use torch.optim.Adam() optimizer')
     parser.add_argument('--sync-bn', action='store_true', help='use SyncBatchNorm, only available in DDP mode')
     parser.add_argument('--local_rank', type=int, default=-1, help='DDP parameter, do not modify')
-    parser.add_argument('--workers', type=int, default=8, help='maximum number of dataloader workers')
+    parser.add_argument('--workers', type=int, default=0, help='maximum number of dataloader workers')
     parser.add_argument('--project', default='runs/train', help='save to project/name')
     parser.add_argument('--entity', default=None, help='W&B entity')
     parser.add_argument('--name', default='exp', help='save to project/name')
